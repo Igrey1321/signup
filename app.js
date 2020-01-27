@@ -1,29 +1,14 @@
-document.head.appendChild (document.createElement ('script'))
-        .src = 'https://cdn.rawgit.com/chrisveness/crypto/4e93a4d/sha256.js'
-
 let hash = ''
 
-const login = document.body.appendChild (
-    document.createElement ('input')
-)
-login.placeholder = 'Login'
+const login = document.getElementById ('login')
 
-const pass1 = document.body.appendChild (
-    document.createElement ('input')
-)
-pass1.placeholder = 'Password'
+const pass1 = document.getElementById ('pass1')
 
-const pass2 = document.body.appendChild (
-    document.createElement ('input')
-)
+const pass2 = document.getElementById ('pass2')
 pass2.disabled = true
-pass2.placeholder = 'Repeate password'
 
-const submit = document.body.appendChild (
-    document.createElement ('button')
-)
+const submit = document.getElementById ('submit')
 submit.disabled = true
-submit.innerText = 'Submit'
 
 pass1.oninput = function (event) {
     event.target.test = Boolean (event.target.value.length >= 8 
