@@ -63,9 +63,11 @@ body {
 /* form */
 .container {
     max-width: 250px;
-    margin: 0 auto;
+    margin: 50px auto;
     padding: 100px 0;
     text-align:center;
+    background: linear-gradient(-45deg, #151700c4, #e7833c, #23A6D5, #02022bd1);
+    border-radius: 10px;
 }
 .container input  {
     outline:none;
@@ -89,11 +91,6 @@ input:focus::-moz-placeholder {
 }
 input:focus:-ms-input-placeholder {
     color: transparent;
-}
-.container form {
-    background: linear-gradient(-45deg, #151700c4, #e7833c, #23A6D5, #02022bd1);
-    border-radius: 10px;
-    padding: 50px 0;
 }
 #submit {
     padding: 10px 30px;
