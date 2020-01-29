@@ -55,14 +55,10 @@ submit.onclick = function (event) {
 }
 
 // Photo
-const avatar = document.body.appendChild(
-    document.createElement('input')
-)
+const avatar = document.getElementById ('get_avatar')
 
-const img = document.body.appendChild (
-    document.createElement ('img')
-)
-avatar.type = 'file'
+const img = document.getElementById ('avatar')
+
 avatar.onchange = function (event) {
     img.src = URL
         .createObjectURL (event.target.files [0])
@@ -73,10 +69,11 @@ avatar.onchange = function (event) {
     const reader = new FileReader
     reader.onload = function (event) {
         img.src = data = event.target.result
+        img.style.opacity = ('1')
     }
     reader.readAsDataURL (event.target.files [0])
 }
-fetch ('https://garevna-rest-api.glitch.me/user/frodo')
+fetch (`https://garevna-rest-api.glitch.me/user/${login}`)
 
 const getUser = async (login) => {
     try {

@@ -64,7 +64,7 @@ body {
 .container {
     max-width: 250px;
     margin: 50px auto;
-    padding: 100px 0;
+    padding: 20px 0;
     text-align:center;
     background: linear-gradient(-45deg, #151700c4, #e7833c, #23A6D5, #02022bd1);
     border-radius: 10px;
@@ -104,4 +104,34 @@ input:focus:-ms-input-placeholder {
     transition: all 0.5s;
     background: #f9bcbc;
     color: #052a42;
+}
+.container_img {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 15px;
+    border: 10px solid #CCC;
+    border-radius: 50%;
+    background-color: #000;
+}
+.container_img_center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 200px;
+    margin: -100px 0 0 -100px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+.container_img_center span {
+    position: absolute;
+    width: 1000em;
+    height: 100%;
+    margin-left: -500em;
+}
+.container_img_center span img {
+    height: 100%;
+    vertical-align: bottom;
+    opacity:0;
 }
