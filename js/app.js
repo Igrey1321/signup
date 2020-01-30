@@ -43,7 +43,8 @@ submit.onclick = function (event) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify ({
-            passhash: hash
+            passhash: hash,
+            avatar: img.src
         })
     }).then (response => {
         console.log (response.ok)

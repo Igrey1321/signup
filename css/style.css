@@ -54,7 +54,6 @@ table {
 label {
 	cursor:pointer;
 }
-/* body */
 body {
     background: url(../img/background.jpg) no-repeat center;
     background-size: cover;
@@ -69,7 +68,7 @@ body {
     background: linear-gradient(-45deg, #151700c4, #e7833c, #23A6D5, #02022bd1);
     border-radius: 10px;
 }
-.container input  {
+.container input[type="text"], .container input[type="password"]  {
     outline:none;
     border:none;
     width: 180px;
@@ -134,4 +133,37 @@ input:focus:-ms-input-placeholder {
     height: 100%;
     vertical-align: bottom;
     opacity:0;
+}
+/*Fail*/
+.get_file .form-group{
+    padding:1em;
+    margin:1em;
+}
+.get_file input[type=file]{
+    outline:0;
+    opacity:0;
+    pointer-events:none;
+    user-select:none;
+    max-width: 1em;
+}
+.get_file .label{
+    width:144px;
+    border:2px dashed #16389c;
+    border-radius:5px;
+    display:block;
+    padding:1.2em;
+    transition:border 300ms ease;
+    cursor:pointer;
+    text-align:center;
+}
+.get_file .label i,.get_file .label .title{
+    color:#16389c;
+    transition:200ms color;
+    font-family: 'Libre Franklin', sans-serif;
+}
+.get_file .label:hover{
+    border:2px solid #000;
+}
+.get_file .label:hover i,.get_file .label:hover .title{
+    color:#000;
 }
