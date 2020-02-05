@@ -39,8 +39,8 @@ submit.onclick = function (event) {
     }),
   }).then((response) => {
     if (response.ok) {
-      document.cookie = `login = ${login.value}`;
-      document.cookie = `hash = ${hash}`;
+      document.cookie = `login=${login.value}`;
+      document.cookie = `hash=${hash}`;
     } else throw new Error('');
   });
 };
@@ -77,3 +77,45 @@ const getUser = async (login) => {
     console.warn('User is not defined');
   }
 };
+
+// FormData
+
+const formData = new FormData
+
+const input = document.body.appendChild(
+  document.createElement('input')
+)
+input.type = 'file'
+
+input.onchange = function (event) {
+    formData.set('avatar', event.target.files[0])
+}
+ 
+
+const img = document.body.appendChild (
+    document.createElement('img')
+)
+function getFormData ( url ) {
+    fetch ( url ).then ( response => response.formData() )
+        .then ( formData => formData.forEach ( 
+            prop => {
+                if (prop instanceof File && prop.type.match(/image/)) {
+                  img.src = URL.createObjectURL(prop)
+                }
+            }
+        ))
+}
+
+getFormData ( "https://garevna-form-data.glitch.me/forms/Lolo" )
+
+
+
+
+const submit = document.getElementById('submit')
+
+submit.onclick = function (event) {
+  const formData = new FormData (
+    document.getElementById('form')
+  )
+  formData.forEach (item => console.log (item))
+}
