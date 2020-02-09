@@ -5,10 +5,14 @@ const pass2 = document.getElementById('pass2');
 pass2.disabled = true;
 const submit = document.getElementById('submit');
 submit.disabled = true;
+const signup = document.getElementById('signup');
+const signupButton = document.getElementById('signupButton');
+signupButton.onclick = () => {
+  signup.style.display = 'block';
+};
 pass1.oninput = function (event) {
   event.target.test = Boolean(event.target.value.length >= 8
-        && event.target.value.match(/\d/g)
-            && event.target.value.match(/\w/g));
+        && event.target.value.match(/\d\w/g));
   event.target.style.color = event.target.test ? 'green' : 'red';
 };
 pass1.onchange = function (event) {
@@ -77,45 +81,3 @@ const getUser = async (login) => {
     console.warn('User is not defined');
   }
 };
-
-// FormData
-
-const formData = new FormData
-
-const input = document.body.appendChild(
-  document.createElement('input')
-)
-input.type = 'file'
-
-input.onchange = function (event) {
-    formData.set('avatar', event.target.files[0])
-}
- 
-
-const img = document.body.appendChild (
-    document.createElement('img')
-)
-function getFormData ( url ) {
-    fetch ( url ).then ( response => response.formData() )
-        .then ( formData => formData.forEach ( 
-            prop => {
-                if (prop instanceof File && prop.type.match(/image/)) {
-                  img.src = URL.createObjectURL(prop)
-                }
-            }
-        ))
-}
-
-getFormData ( "https://garevna-form-data.glitch.me/forms/Lolo" )
-
-
-
-
-const submit = document.getElementById('submit')
-
-submit.onclick = function (event) {
-  const formData = new FormData (
-    document.getElementById('form')
-  )
-  formData.forEach (item => console.log (item))
-}
