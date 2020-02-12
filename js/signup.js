@@ -45,7 +45,7 @@ submit.onclick = function (event) {
     if (response.ok) {
       document.cookie = `login=${login.value}`;
       document.cookie = `hash=${hash}`;
-    } else throw new Error('');
+    } else throw new Error('Error cookie');
   });
 };
 
@@ -69,15 +69,3 @@ avatar.onchange = function (event) {
   reader.readAsDataURL(event.target.files[0]);
 };
 fetch(`https://garevna-rest-api.glitch.me/user/${login}`);
-
-const getUser = async (login) => {
-  try {
-    const data = await (
-      (await fetch(`https://garevna-rest-api.glitch.me/user/${login}`)).json());
-    document.body.appendChild(
-      document.createElement('img'),
-    );
-  } catch (err) {
-    console.warn('User is not defined');
-  }
-};
