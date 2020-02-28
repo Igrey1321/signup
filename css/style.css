@@ -271,13 +271,13 @@ h3 span {
 }
 
 /* ================================================================================= */
-#signup {
+.form_style {
     max-width: 295px;
     margin: 100px auto;
-    padding-bottom: 20px;
+    padding: 10px 0;
     text-align:center;
     background: #fff;
-    display:none;
+    /* display:none; */
     position: fixed;
     left: 50%;
     top: 20px;
@@ -293,7 +293,7 @@ h3 span {
 	font-family: 'Libre Franklin', sans-serif;
 	background-color: #eee;
 }
-#submit {
+.submit_style {
     padding: 10px 30px;
     background-color: #3f0a63a1;
     color: #fff;
@@ -301,7 +301,7 @@ h3 span {
     border-radius: 4px;
     font-family: 'Libre Franklin', sans-serif;
 }
-#submit:hover {
+.submit_style:hover {
     transition: all 0.5s;
     background: #f9bcbc;
     color: #052a42;
@@ -368,3 +368,4 @@ h3 span {
 .get_file .label:hover i,.get_file .label:hover .title{
     color:#000;
 }
+/* ===============================Log in================================ */

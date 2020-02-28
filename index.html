@@ -25,7 +25,7 @@
                 <li>Contact</li>
             </ul>
             <ul class="user">
-                <li>Log in</li>
+                <li id="loginButton">Log in</li>
                 <li id="signupButton">Sign up</li>
                 <li></li>
             </ul>
@@ -83,8 +83,8 @@
         </div>
     </footer>
     <div class="container">
-        <div id="signup">
-            <div class="container_img">
+        <div class="form_style" id="signup">
+            <div class="container_img" id="img_none">
                 <div class="container_img_center">
                     <span>
                         <img id ="avatar" src="#" alt="Avatar">
@@ -103,13 +103,15 @@
             <input type="email" id="email" placeholder="Email">
             <input type="password" id="pass_one" placeholder="Password">
             <input type="password" id="pass_two" placeholder="Repeate password">
-            <button id="submit">Submit</button>
+            <button class="submit_style"id="submit">Submit</button>
         </div>
     </div>
-    <div>
-        <input type="text" id="login_in" placeholder="Login">
-        <input type="password" id="pass_in" placeholder="Password">
-        <button id="submit_in">Submit</button>
+    <div class="container">
+        <div class="form_style" id="log_in">
+            <input type="text" id="login_in" placeholder="Login">
+            <input type="password" id="pass_in" placeholder="Password">
+            <button class="submit_style" id="submit_in">Submit</button>
+        </div>
     </div>
     <script src="js/app.js"></script>
 </body>
