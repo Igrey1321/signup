@@ -31,7 +31,6 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
-/* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
@@ -57,9 +56,8 @@ table {
 a {
 	text-decoration: none;
 }
-/* Header */
 .wrapper {
-	width: 1140px;
+	max-width: 1140px;
 	margin: 0 auto;
 }
 .header .wrapper {
@@ -72,6 +70,7 @@ a {
 .header ul {
 	display: flex;
 	padding: 30px;
+	flex-wrap: wrap;
 }
 .header ul li {
 	padding: 0 5px;
@@ -82,11 +81,12 @@ a {
 	color: #FF4B2B;
 	transition: .2s ease;
 }
-.header .user>li:last-child {
+#user_avatar {
 	width: 40px;
 	height: 40px;
-	background: url(../img/user.svg) center no-repeat;
+	border-radius: 15px;
 	cursor: inherit;
+	object-fit: cover;
 }
 h1 {
 color: #616161;
@@ -98,7 +98,6 @@ line-height: 27px;
 h1 span {
 	color: #fc5f45;
 }
-/* About */
 .about {
 	background: url(../img/background.png) center no-repeat;
 	background-size: cover;
@@ -114,7 +113,7 @@ h1 span {
 	right: 0;
 	left: 0;
 }
-.about__info {
+.about_info {
 	color: #17205d;
 	font-family: 'Libre Baskerville', serif;
 	font-size: 60px;
@@ -122,7 +121,7 @@ h1 span {
 	line-height: 85px;
 	padding: 175px 0 50px 0;
 }
-.about__work {
+.about_work {
 	border-radius: 25px;
 	background-color: #fc5f45;
 	color: #fff;
@@ -133,7 +132,7 @@ h1 span {
 	text-transform: uppercase;
 	padding: 19px 41px;
 }
-.about__skill {
+.about_skill {
 	display: flex;
 	justify-content: space-around;
 	padding: 100px;
@@ -143,11 +142,11 @@ h1 span {
 	line-height: 80px;
 	text-transform: uppercase;
 }
-.about .skill__one {
+.about .skill_one {
 	color: #38c695;
 	position: relative;
 }
-.about .skill__one:before {
+.about .skill_one:before {
 	content: "";
 	width: 40px;
 	height: 40px;
@@ -157,11 +156,11 @@ h1 span {
 	position: absolute;
 	background: url(../img/skill_1.svg);
 }
-.about .skill__two {
+.about .skill_two {
 	color: #b27cf5;
 	position: relative;
 }
-.about .skill__two:before {
+.about .skill_two:before {
 	content: "";
 	width: 40px;
 	height: 40px;
@@ -171,11 +170,11 @@ h1 span {
 	position: absolute;
 	background: url(../img/skill_2.svg);
 }
-.about .skill__three {
+.about .skill_three {
 	color: #feb960;
 	position: relative;
 }
-.about .skill__three:before {
+.about .skill_three:before {
 	content: "";
 	width: 40px;
 	height: 40px;
@@ -185,7 +184,6 @@ h1 span {
 	position: absolute;
 	background: url(../img/skill_3.svg);
 }
-/* Portfolio */
 .portfolio {
 	text-align: center;
 }
@@ -205,18 +203,17 @@ h1 span {
 	line-height: 80px;
 	padding-bottom: 80px;
 }
-.portfolio__link {
+.portfolio_link {
 	display: flex;
 	flex-wrap: wrap;
 	margin-bottom: 150px;
 }
-.portfolio__link li {
+.portfolio_link li {
 	width: 360px;
 	height: 290px;
 	background: url(../img/bakerybo.jpg) no-repeat;
 	margin: 5px;
 }
-/* Footer */
 footer {
 	background-color: rgba(38, 39, 50, 0.85);
 	padding: 50px 0;
@@ -225,7 +222,7 @@ footer .wrapper {
 	display: flex;
 	justify-content: space-between;
 }
-.footer__contact {
+.footer_contact {
 	display: flex;
 	justify-content: space-between;
 }
@@ -239,25 +236,25 @@ line-height: 27px;
 h3 span {
 	color: #fc5f45;
 }
-.footer__contact li {
+.footer_contact li {
 	width: 200px;
 	margin-right: 50px;
 }
-.footer__local p:first-child {
+.footer_local p:first-child {
 	color: #38c695;
 	font-family: 'Poppins', sans-serif;
 	font-size: 18px;
 	font-weight: 500;
 	padding-bottom: 30px;
 }
-.footer__local p:last-child {
+.footer_local p:last-child {
 	color: #fef4f2;
 	font-family: 'Poppins', sans-serif;
 	font-size: 16px;
 	font-weight: 400;
 	line-height: 27px;
 }
-.footer__link p {
+.footer_link p {
 	font-family: 'Poppins', sans-serif;
 	color: #feb960;
 	font-family: Poppins;
@@ -265,19 +262,16 @@ h3 span {
 	font-weight: 500;
 	line-height: 27px;
 }
-.footer__social {
+.footer_social {
 	display: flex;
 	flex-wrap: wrap;
 }
-
-/* ================================================================================= */
 .form_style {
     max-width: 295px;
     margin: 100px auto;
     padding: 10px 0;
     text-align:center;
     background: #fff;
-    /* display:none; */
     position: fixed;
     left: 50%;
     top: 20px;
@@ -336,7 +330,6 @@ h3 span {
     vertical-align: bottom;
     opacity:0;
 }
-/*Fail*/
 .get_file .form-group{
     margin:1em;
 }
@@ -368,4 +361,3 @@ h3 span {
 .get_file .label:hover i,.get_file .label:hover .title{
     color:#000;
 }
-/* ===============================Log in================================ */
