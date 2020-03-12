@@ -56,30 +56,51 @@ table {
 a {
 	text-decoration: none;
 }
+/* ===================================header====================== */
 .wrapper {
 	max-width: 1140px;
 	margin: 0 auto;
 }
-.header .wrapper {
+.header {
 	display: flex;
 	justify-content: space-between;
-}
-.header .logo {
-	margin: 24px 0;
+	padding: 24px 15px;
 }
 .header ul {
 	display: flex;
-	padding: 30px;
 	flex-wrap: wrap;
 }
 .header ul li {
-	padding: 0 5px;
-	line-height: 40px;
+	position: relative;
+	margin: 0 10px;
 	cursor: pointer;
+	font-family: 'Poppins', sans-serif;
+	color: #272727;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 40px;
 }
 .header ul li:hover {
-	color: #FF4B2B;
+	color: #fc5f45;
 	transition: .2s ease;
+}
+.header .nav li:hover::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: 20px;
+	height: 1px;
+	background: #000;
+	animation: navline 1s;
+	width: 100%
+}
+@keyframes navline {
+	0% {
+		width: 0%;
+	}
+	100% {
+		width: 100%;
+	}
 }
 #user_avatar {
 	width: 40px;
@@ -89,11 +110,11 @@ a {
 	object-fit: cover;
 }
 h1 {
-color: #616161;
-font-family: "Wisdom - Script";
-font-size: 35px;
-font-weight: 400;
-line-height: 27px;
+	color: #616161;
+	font-family: "Wisdom - Script";
+	font-size: 35px;
+	font-weight: 400;
+	line-height: 27px;
 }
 h1 span {
 	color: #fc5f45;
