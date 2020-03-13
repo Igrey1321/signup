@@ -1,10 +1,10 @@
 let hash = ''
 const [name, email, passOne, passTwo, submit, signup, ignupButton
   , avatar, img, loginIn, passIn, submitIn, logIn, loginButton, imgNone
-    , userAvatar] =
+    , userAvatar, closedSignup, closedLogIn] =
     [ 'name', 'email', 'pass_one', 'pass_two', 'submit', 'signup', 'ignupButton'
     ,'get_avatar', 'avatar', 'login_in', 'pass_in', 'submit_in', 'log_in', 'loginButton', 'img_none'
-      , 'user_avatar' ]
+      , 'user_avatar', 'closed_signup', 'closed_log_in']
         .map ( item => document.getElementById ( item ) )
 
 passTwo.disabled = true
@@ -23,7 +23,12 @@ loginButton.onclick = function (event) {
   trigger(logIn)
   signup.style.display = 'none'
 }
-
+closedSignup.onclick = function (event) {
+  signup.style.display = 'none'
+}
+closedLogIn.onclick = function (event) {
+  logIn.style.display = 'none'
+}
 //===============================================checkForm======//
 
 email.onchange = function (event) {

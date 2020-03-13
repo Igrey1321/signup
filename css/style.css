@@ -257,7 +257,7 @@ line-height: 27px;
 h3 span {
 	color: #fc5f45;
 }
-.footer_contact li {
+.footer_contact>li {
 	width: 200px;
 	margin-right: 50px;
 }
@@ -278,15 +278,42 @@ h3 span {
 .footer_link p {
 	font-family: 'Poppins', sans-serif;
 	color: #feb960;
-	font-family: Poppins;
 	font-size: 18px;
 	font-weight: 500;
 	line-height: 27px;
+	padding-bottom: 20px;
 }
 .footer_social {
 	display: flex;
 	flex-wrap: wrap;
 }
+.footer_social li {
+	width: 30px;
+	height: 30px;
+	background: url(../img/sprite.png);
+	transition: .5s;
+	margin-right: 20px;
+}
+.footer_social li a {
+	display: block;
+    height: 100%;
+}
+.footer_social li+li {
+	background-position: 30px 0;
+}
+.footer_social li+li+li {
+	background-position: 60px 0;
+}
+.footer_social li:hover {
+	background-position: 0 30px;
+}
+.footer_social li+li:hover {
+	background-position: 30px 30px;
+}
+.footer_social li+li+li:hover {
+	background-position: 60px 30px;
+}
+/* ======================================form============================ */
 .form_style {
     max-width: 295px;
     margin: 100px auto;
@@ -296,7 +323,50 @@ h3 span {
     position: fixed;
     left: 50%;
     top: 20px;
-    transform: translate(-50%);
+	transform: translate(-50%);
+    border: 2px solid #fc5f45;
+}
+.closed_form {
+	position: absolute;
+    top: -9px;
+    right: -10px;
+    width: 25px;
+    height: 25px;
+    border-radius: 12px;
+	background: #fff;	
+	border: 2px solid #fc5f45;
+}
+.closed_form:hover {	
+	animation: closed 2s ease;
+	/* transform: rotate(0deg); */
+}
+@keyframes closed {
+	50% {
+		transform: rotate(90deg);
+		border: 2px solid #000;
+	}
+}
+.closed_form::before {
+	content: "";
+	position: absolute;
+	display: block;
+	top: 10px;
+    left: 8px;
+    width: 20px;
+    height: 20px;
+	border-left: 2px solid #fc5f45;
+    transform: rotate(45deg);
+}
+.closed_form::after {
+	content: "";
+	position: absolute;
+	display: block;
+	top: 10px;
+    left: -5px;
+    width: 20px;
+    height: 20px;
+	border-right: 2px solid #fc5f45;
+    transform: rotate(-45deg);
 }
 .container input[type="text"], input[type="password"],  input[type="email"]{
     border:none;
