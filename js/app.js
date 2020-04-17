@@ -4,34 +4,30 @@ const [name, email, passOne, passTwo, submit, signup, ignupButton
   , avatar, img, loginIn, passIn, submitIn, logIn, loginButton, imgNone
     , userAvatar, closedSignup, closedLogIn] =
     [ 'name', 'email', 'pass_one', 'pass_two', 'submit', 'signup', 'ignupButton'
-    ,'get_avatar', 'avatar', 'login_in', 'pass_in', 'submit_in', 'log_in', 'loginButton', 'img_none'
-      , 'user_avatar', 'closed_signup', 'closed_log_in']
+    ,'get_avatar', 'avatar', 'login_in', 'pass_in', 'submit_in', 'login', 'loginButton', 'img_none'
+      , 'user_avatar', 'closed_signup', 'closed_login']
         .map ( item => document.getElementById ( item ) )
 
 //===============================data
 
 const cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)name\s*\=\s*([^;]*).*$)|^.*$/, "$1")
 let hash = ''
+let hashIn = ''
 passTwo.disabled = true
 submit.disabled = true
 signup.style.display = 'none'
 logIn.style.display = 'none'
-let usersData = {}
-let hashIn = ''
 
 //===============================function
-const fetchRequest = async nameUser => {
-  const usersData = await (await fetch(`https://garevna-rest-api.glitch.me/user/${nameUser}`)).json()
-  return usersData
-}
+const fetchRequest = async nameUser => await (await 
+  fetch(`https://garevna-rest-api.glitch.me/user/${nameUser}`)).json()
 
 const cookieRead = async name => {
   if (name !== '') {
-    const usersInfo = fetchRequest(name)
-    const usersObj = await usersInfo
+    const usersInfo = await fetchRequest(name)
     const cookieHash = document.cookie.replace(/(?:(?:^|.*;\s*)hash\s*\=\s*([^;]*).*$)|^.*$/, "$1")
-    if (usersObj.passhash === cookieHash) {
-      userAvatar.src = `${usersObj.avatar}`
+    if (usersInfo.passhash === cookieHash) {
+      userAvatar.src = `${usersInfo.avatar}`
     }
   }
 }
@@ -77,9 +73,10 @@ passTwo.oninput = function (event) {
             === passOne.value ? 'green' : 'red'
 }
 passTwo.onchange = function (event) {
-  if (event.target.value === passOne.value) { hash = Sha256.hash(event.target.value) }
-  submit.disabled = !(hash
-            && name.value.match(/\S/))
+  if (event.target.value === passOne.value) { 
+    hash = Sha256.hash(event.target.value) 
+  }
+  submit.disabled = !(hash && name.value.match(/\S/))
 }
 
 submit.onclick = function (event) {
@@ -118,19 +115,14 @@ avatar.onchange = function (event) {
   reader.readAsDataURL(event.target.files[0])
 }
 
-submitIn.onclick = function (event) {
-  fetch(`https://garevna-rest-api.glitch.me/user/${loginIn.value}`)
-    .then((response) => response.json()
-      .then((response) => {usersData = response
-        hashIn = Sha256.hash(passIn.value)
-          if (hashIn === usersData.passhash) {
-            document.cookie = `name=${loginIn.value}`
-            document.cookie = `hash=${hashIn}`
-            userAvatar.src = `${usersData.avatar}`
-            logIn.style.display = 'none'
-          }  
-      })
-    )
+submitIn.onclick = async function (event) {
+  const usersData = await fetchRequest(loginIn.value)
+    if (hashIn === usersData.passhash) {
+      document.cookie = `name=${loginIn.value}`
+      document.cookie = `hash=${hashIn}`
+      userAvatar.src = `${usersData.avatar}`
+      logIn.style.display = 'none'
+    }
 }
 //===============================function call
 cookieRead(cookieValue)
