@@ -88,7 +88,7 @@ a {
 	content: "";
 	position: absolute;
 	left: 0;
-	bottom: 20px;
+	bottom: 10px;
 	height: 1px;
 	background: #000;
 	animation: navline 1s;
@@ -108,6 +108,7 @@ a {
 	border-radius: 15px;
 	cursor: inherit;
 	object-fit: cover;
+	display: none;
 }
 h1 {
 	color: #616161;
@@ -313,18 +314,44 @@ h3 span {
 .footer_social li+li+li:hover {
 	background-position: 60px 30px;
 }
-/* ======================================form============================ */
-.form_style {
-    max-width: 295px;
-    margin: 100px auto;
-    padding: 10px 0;
-    text-align:center;
-    background: #fff;
+/* ======================================modal============================ */
+.modal.open .modal_overlay {
+	background: rgba(0, 0, 0, .5);
+	z-index: 1000;
+}
+.modal.open .modal_window {
+    transform: translateY(50px);
+}
+.modal.hide .modal_overlay {
+    background: rgba(0, 0, 0, 0);
+    z-index: 1000;
+}
+.modal.hide .modal_window {
+	transform: translateY(-1000px);
+}
+.modal_overlay {
     position: fixed;
-    left: 50%;
-    top: 20px;
-	transform: translate(-50%);
-    border: 2px solid #fc5f45;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: -5;
+    transition: background-color .3s ease-in ;
+}
+.modal_window {
+    max-width: 290px;
+	margin: 0 auto;
+	padding: 10px 0;
+    background: #fff;
+    text-align: center;
+    transform: translateY(-1000px);
+	transition: transform .3s ease-in;
+	box-shadow: 5px 5px 10px #fff6, -5px -5px 10px #fff6;
+}
+.modal_body input {
+    display: block;
+    margin: 0 auto;
 }
 .closed_form {
 	position: absolute;
@@ -338,7 +365,6 @@ h3 span {
 }
 .closed_form:hover {	
 	animation: closed 2s ease;
-	/* transform: rotate(0deg); */
 }
 @keyframes closed {
 	50% {
@@ -368,7 +394,7 @@ h3 span {
 	border-right: 2px solid #fc5f45;
     transform: rotate(-45deg);
 }
-.container input[type="text"], input[type="password"],  input[type="email"]{
+.modal input[type="text"], input[type="password"],  input[type="email"]{
     border:none;
     width: 180px;
     height: 30px;
@@ -429,7 +455,8 @@ h3 span {
     opacity:0;
     pointer-events:none;
     user-select:none;
-    max-width: 0em;
+	max-width: 0em;
+	height: 0;
 }
 .get_file .label{
     width:100px;

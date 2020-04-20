@@ -1,24 +1,20 @@
-//===============================variables
+//===============================data========================
 
-const [name, email, passOne, passTwo, submit, signup, ignupButton
-  , avatar, img, loginIn, passIn, submitIn, logIn, loginButton, imgNone
-    , userAvatar, closedSignup, closedLogIn] =
-    [ 'name', 'email', 'pass_one', 'pass_two', 'submit', 'signup', 'ignupButton'
-    ,'get_avatar', 'avatar', 'login_in', 'pass_in', 'submit_in', 'login', 'loginButton', 'img_none'
-      , 'user_avatar', 'closed_signup', 'closed_login']
+const [name, email, passOne, passTwo, submit, signUpWindow, ignupButton
+  , avatar, img, loginIn, passIn, submitIn, logInWindow, loginButton
+  , signupButton, imgNone, userAvatar, closedSignup, closedLogIn
+  , signUpOverlay, logInOverlay, userName] =
+    [ 'name', 'email', 'pass_one', 'pass_two', 'submit', 'sign_up_window', 'ignupButton'
+    ,'get_avatar', 'avatar', 'login_in', 'pass_in', 'submit_in', 'log_in_window', 'loginButton'
+    , 'signupButton', 'img_none', 'user_avatar', 'closed_signup', 'closed_login'
+    , 'sign_up_overlay', 'log_in_overlay', 'user_name']
         .map ( item => document.getElementById ( item ) )
-
-//===============================data
-
 const cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)name\s*\=\s*([^;]*).*$)|^.*$/, "$1")
 let hash = ''
-let hashIn = ''
 passTwo.disabled = true
 submit.disabled = true
-signup.style.display = 'none'
-logIn.style.display = 'none'
 
-//===============================function
+//===============================function==========================
 const fetchRequest = async nameUser => await (await 
   fetch(`https://garevna-rest-api.glitch.me/user/${nameUser}`)).json()
 
@@ -31,27 +27,40 @@ const cookieRead = async name => {
     }
   }
 }
-
-const trigger = elem => elem.style.display = elem.style.display === 'none' ? 'block' : 'none'
-
-const formOff = elem => elem.style.display = 'none'
-
-//===============================callback
+const renderUser = (userNameText, imgURL) => {
+  signupButton.style.display = 'none'
+  loginButton.style.display = 'none'
+  userName.insertAdjacentText("afterbegin", userNameText)
+  userAvatar.src = `${imgURL}`
+  userAvatar.style.display = 'block'
+}
+// const addElement = (tag, className) => {
+//   const elem = document.body.appendChild (
+//     document.createElement(`${tag}`))
+//   elem.classList.add(`${className}`)
+// }
+//===============================callback===============
 
 signupButton.onclick = function (event) {
-  trigger(signup)
-  formOff(logIn)
+  modalSignUp.open()
 }
 loginButton.onclick = function (event) {
-  trigger(logIn)
-  formOff(signup)
+  modalLogIn.open()
 }
 closedSignup.onclick = function (event) {
-  formOff(signup)
+  modalSignUp.closed()
 }
 closedLogIn.onclick = function (event) {
-  formOff(logIn)
+  modalLogIn.closed()
 }
+signUpOverlay.onclick = function (event) {
+  modalSignUp.closed()
+}
+logInOverlay.onclick = function (event) {
+  modalLogIn.closed()
+}
+signUpWindow.onclick = (event) => event.stopPropagation()
+logInWindow.onclick = (event) => event.stopPropagation()
 
 email.onchange = function (event) {
   event.target.test = Boolean(event.target.value.length >= 5
@@ -94,8 +103,8 @@ submit.onclick = function (event) {
     if (response.ok) {
       document.cookie = `name=${name.value}`
       document.cookie = `hash=${hash}`
-      userAvatar.src = `${img.src}`
-      signup.style.display = 'none'
+      renderUser(name.value, img.src)
+      modalSignUp.closed()
     } else throw new Error('Error cookie')
   })
 }
@@ -117,12 +126,13 @@ avatar.onchange = function (event) {
 
 submitIn.onclick = async function (event) {
   const usersData = await fetchRequest(loginIn.value)
+  let hashIn = Sha256.hash(passIn.value);
     if (hashIn === usersData.passhash) {
       document.cookie = `name=${loginIn.value}`
       document.cookie = `hash=${hashIn}`
-      userAvatar.src = `${usersData.avatar}`
-      logIn.style.display = 'none'
+      renderUser(loginIn.value, usersData.avatar)
+      modalLogIn.closed()
     }
 }
-//===============================function call
+//===============================function call====================
 cookieRead(cookieValue)

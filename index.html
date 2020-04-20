@@ -24,10 +24,11 @@
             <li>Contact</li>
         </ul>
         <ul class="user">
-            <li id="loginButton">Log in</li>
-            <li id="signupButton">Sign up</li>
+            <li id="loginButton">Log In</li>
+            <li id="signupButton">Sign Up</li>
+            <li id="user_name"></li>
             <li>
-                <img id="user_avatar" src="img/user.svg" alt="user">
+                <img id="user_avatar" src="#" alt="user">
             </li>
         </ul>
     </div>
@@ -80,39 +81,7 @@
             </ul>
         </div>
     </footer>
-    <div class="container">
-        <div class="form_style" id="signup">
-            <span class="closed_form" id="closed_signup"></span>
-            <div class="container_img" id="img_none">
-                <div class="container_img_center">
-                    <span>
-                        <img id ="avatar" src="#" alt="Avatar">
-                    </span>
-                </div>
-            </div>
-            <div class="get_file">
-                <div class="form-group">
-                <label class="label">
-                    <span class="title">Add Avatar</span>
-                    <input id="get_avatar" type="file">
-                </label>
-                </div>
-            </div>
-            <input type="text" id="name" placeholder="Name">
-            <input type="email" id="email" placeholder="Email">
-            <input type="password" id="pass_one" placeholder="Password">
-            <input type="password" id="pass_two" placeholder="Repeate password">
-            <button class="submit_style" id="submit">Submit</button>
-        </div>
-    </div>
-    <div class="container">
-        <div class="form_style" id="login">
-            <span class="closed_form" id="closed_login"></span>
-            <input type="text" id="login_in" placeholder="Login">
-            <input type="password" id="pass_in" placeholder="Password">
-            <button class="submit_style" id="submit_in">Submit</button>
-        </div>
-    </div>
+    <script src="plugins/modal.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
