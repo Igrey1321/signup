@@ -137,7 +137,7 @@ h1 span {
 }
 .about_info {
 	color: #17205d;
-	font-family: 'Libre Baskerville', serif;
+	font-family: 'Libre Baskerville', sans-serif;
 	font-size: 60px;
 	font-weight: 400;
 	line-height: 85px;
@@ -163,6 +163,9 @@ h1 span {
 	font-weight: 500;
 	line-height: 80px;
 	text-transform: uppercase;
+}
+.about_skill p {
+	font-family: 'Poppins', sans-serif;
 }
 .about .skill_one {
 	color: #38c695;
@@ -211,7 +214,7 @@ h1 span {
 }
 .portfolio p:first-child {
 	color: #313131;
-	font-family: 'Libre Baskerville', serif;
+	font-family: 'Libre Baskerville', sans-serif;
 	font-size: 50px;
 	font-weight: 700;
 	line-height: 80px;
