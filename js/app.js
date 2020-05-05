@@ -3,16 +3,16 @@
 const [name, email, passOne, passTwo, submit, signUpWindow, ignupButton
   , avatar, img, loginIn, passIn, submitIn, logInWindow, loginButton
   , signupButton, imgNone, userAvatar, closedSignup, closedLogIn
-  , signUpOverlay, logInOverlay, userName] =
+  , signUpOverlay, logInOverlay, userName, modalError] =
     [ 'name', 'email', 'pass_one', 'pass_two', 'submit', 'sign_up_window', 'ignupButton'
     ,'get_avatar', 'avatar', 'login_in', 'pass_in', 'submit_in', 'log_in_window', 'loginButton'
     , 'signupButton', 'img_none', 'user_avatar', 'closed_signup', 'closed_login'
-    , 'sign_up_overlay', 'log_in_overlay', 'user_name']
+    , 'sign_up_overlay', 'log_in_overlay', 'user_name', 'modal_error']
         .map ( item => document.getElementById ( item ) )
 const cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)name\s*\=\s*([^;]*).*$)|^.*$/, "$1")
-let hash = ''
 passTwo.disabled = true
 submit.disabled = true
+submitIn.disabled = true
 
 //===============================function==========================
 const fetchRequest = async nameUser => await (await 
@@ -34,11 +34,6 @@ const renderUser = (userNameText, imgURL) => {
   userAvatar.src = `${imgURL}`
   userAvatar.style.display = 'block'
 }
-// const addElement = (tag, className) => {
-//   const elem = document.body.appendChild (
-//     document.createElement(`${tag}`))
-//   elem.classList.add(`${className}`)
-// }
 //===============================callback===============
 
 signupButton.onclick = function (event) {
@@ -82,6 +77,7 @@ passTwo.oninput = function (event) {
             === passOne.value ? 'green' : 'red'
 }
 passTwo.onchange = function (event) {
+  let hash = ''
   if (event.target.value === passOne.value) { 
     hash = Sha256.hash(event.target.value) 
   }
@@ -124,15 +120,39 @@ avatar.onchange = function (event) {
   reader.readAsDataURL(event.target.files[0])
 }
 
+let loginSuccess = {
+  loginCorrect: false,
+  passCorrect: false,
+  passHash: '',
+  avatar: '',
+}
+loginIn.onchange = async function () {
+  modalError.textContent = ''
+  loginSuccess.loginCorrect = false
+  let usersData
+  if (loginIn.value !== '') {
+    usersData = await fetchRequest(loginIn.value)
+    if (usersData.error === 404) {
+      modalError.innerText = `User ${loginIn.value} not found`
+    }else  loginSuccess.loginCorrect = true
+      loginSuccess.passHash = usersData.passhash
+      loginSuccess.avatar = usersData.avatar
+  }
+}
+passIn.oninput = function () {
+  modalError.textContent = ''
+  let passvalue = Sha256.hash(event.target.value)
+  if (passvalue === loginSuccess.passHash) {
+    submitIn.disabled = false
+  }else modalError.innerText = `Incorrect password`
+}
 submitIn.onclick = async function (event) {
-  const usersData = await fetchRequest(loginIn.value)
-  let hashIn = Sha256.hash(passIn.value);
-    if (hashIn === usersData.passhash) {
-      document.cookie = `name=${loginIn.value}`
-      document.cookie = `hash=${hashIn}`
-      renderUser(loginIn.value, usersData.avatar)
-      modalLogIn.closed()
-    }
+  if (loginSuccess.loginCorrect) {
+    document.cookie = `name=${loginIn.value}`
+    document.cookie = `hash=${loginSuccess.passHash}`
+    renderUser(loginIn.value, loginSuccess.avatar)
+    modalLogIn.closed()
+  }
 }
 //===============================function call====================
 cookieRead(cookieValue)

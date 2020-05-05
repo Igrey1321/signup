@@ -356,6 +356,14 @@ h3 span {
     display: block;
     margin: 0 auto;
 }
+.modal_text {
+    width: 180px;
+    height: 30px;
+    margin: 0 auto;
+    color: #fc5f45;
+	font-family: 'Libre Franklin', sans-serif;
+	font-size: 13px;
+}
 .closed_form {
 	position: absolute;
     top: -9px;

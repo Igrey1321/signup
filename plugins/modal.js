@@ -38,6 +38,7 @@ let logInHtml = `
         <span class="closed_form" id="closed_login"></span>
       </div>
       <div class="modal_body">
+        <p class="modal_text" id="modal_error"></p>
         <input type="text" id="login_in" placeholder="Login">
         <input type="password" id="pass_in" placeholder="Password">
       </div>
