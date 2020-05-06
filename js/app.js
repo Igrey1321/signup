@@ -23,7 +23,7 @@ const cookieRead = async name => {
     const usersInfo = await fetchRequest(name)
     const cookieHash = document.cookie.replace(/(?:(?:^|.*;\s*)hash\s*\=\s*([^;]*).*$)|^.*$/, "$1")
     if (usersInfo.passhash === cookieHash) {
-      userAvatar.src = `${usersInfo.avatar}`
+      renderUser(name, usersInfo.avatar)
     }
   }
 }
