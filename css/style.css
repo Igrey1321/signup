@@ -250,6 +250,7 @@ footer .wrapper {
 .footer_contact {
 	display: flex;
 	justify-content: space-between;
+	flex-wrap: wrap;
 }
 h3 {
 color: #fef4f2;
