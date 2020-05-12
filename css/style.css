@@ -56,21 +56,35 @@ table {
 a {
 	text-decoration: none;
 }
+
 /* ===================================header====================== */
+
+header {
+	padding: 25px 0;
+}
 .wrapper {
 	max-width: 1140px;
 	margin: 0 auto;
 }
-.header {
+.wrapper__position {
 	display: flex;
 	justify-content: space-between;
-	padding: 24px 15px;
 }
-.header ul {
+h1 {
+	color: #616161;
+	font-family: "Wisdom - Script";
+	font-size: 35px;
+	font-weight: 400;
+	line-height: 27px;
+}
+h1 span {
+	color: #fc5f45;
+}
+header ul {
 	display: flex;
 	flex-wrap: wrap;
 }
-.header ul li {
+header ul li {
 	position: relative;
 	margin: 0 10px;
 	cursor: pointer;
@@ -80,11 +94,11 @@ a {
 	font-weight: 500;
 	line-height: 40px;
 }
-.header ul li:hover {
+header ul li:hover {
 	color: #fc5f45;
 	transition: .2s ease;
 }
-.header .nav li:hover::after {
+header .nav li:hover::after {
 	content: "";
 	position: absolute;
 	left: 0;
@@ -102,6 +116,19 @@ a {
 		width: 100%;
 	}
 }
+.user {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.user > div {
+	margin-right: 10px;
+	font-family: 'Poppins', sans-serif;
+	color: #272727;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 40px;
+}
 #user_avatar {
 	width: 40px;
 	height: 40px;
@@ -110,16 +137,9 @@ a {
 	object-fit: cover;
 	display: none;
 }
-h1 {
-	color: #616161;
-	font-family: "Wisdom - Script";
-	font-size: 35px;
-	font-weight: 400;
-	line-height: 27px;
-}
-h1 span {
-	color: #fc5f45;
-}
+
+/* ===================================about====================== */
+
 .about {
 	background: url(../img/background.png) center no-repeat;
 	background-size: cover;
@@ -209,84 +229,59 @@ h1 span {
 	position: absolute;
 	background: url(../img/skill_3.svg);
 }
-.portfolio {
-	text-align: center;
-}
-.portfolio p:first-child {
-	color: #313131;
-	font-family: 'Libre Baskerville', sans-serif;
-	font-size: 50px;
-	font-weight: 700;
-	line-height: 80px;
-	padding: 145px 0 40px;
-}
-.portfolio p:nth-child(2) {
-	color: #616161;
-	font-family: 'Poppins', sans-serif;
-	font-size: 18px;
-	font-weight: 400;
-	line-height: 80px;
-	padding-bottom: 80px;
-}
-.portfolio_link {
-	display: flex;
-	flex-wrap: wrap;
-	margin-bottom: 150px;
-}
-.portfolio_link li {
-	width: 360px;
-	height: 290px;
-	background: url(../img/bakerybo.jpg) no-repeat;
-	margin: 5px;
-}
+
+/* ===================================footer====================== */
+
 footer {
 	background-color: rgba(38, 39, 50, 0.85);
-	padding: 50px 0;
+	padding: 65px 0;
 }
-footer .wrapper {
-	display: flex;
-	justify-content: space-between;
+h3 {
+	color: #fef4f2;
+	font-family: "Wisdom - Script";
+	font-size: 50px;
+	font-weight: 400;
+	line-height: 27px;
+}
+h3 span {
+	color: #fc5f45;
 }
 .footer_contact {
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
 }
-h3 {
-color: #fef4f2;
-font-family: "Wisdom - Script";
-font-size: 50px;
-font-weight: 400;
-line-height: 27px;
-}
-h3 span {
-	color: #fc5f45;
-}
+
 .footer_contact>li {
 	width: 200px;
-	margin-right: 50px;
+	margin-right: 90px;
 }
-.footer_local p:first-child {
-	color: #38c695;
+.footer_contact>li:last-child {
+	margin-right: 0;
+}
+.footer_contact p {
 	font-family: 'Poppins', sans-serif;
+}
+.footer_contact>li p:first-child {
 	font-size: 18px;
 	font-weight: 500;
 	padding-bottom: 30px;
 }
-.footer_local p:last-child {
-	color: #fef4f2;
-	font-family: 'Poppins', sans-serif;
+.footer_contact>li p:last-child {
 	font-size: 16px;
 	font-weight: 400;
 	line-height: 27px;
+	color: #fef4f2;
 }
-.footer_link p {
-	font-family: 'Poppins', sans-serif;
+.footer_local p:first-child {
+	color: #38c695;
+}
+.footer_link p:first-child {
+	color: #b27cf5;
+}
+.footer_social p:first-child {
 	color: #feb960;
-	font-size: 18px;
-	font-weight: 500;
-	line-height: 27px;
-	padding-bottom: 20px;
+	width: 100%;
 }
 .footer_social {
 	display: flex;
@@ -299,7 +294,10 @@ h3 span {
 	transition: .5s;
 	margin-right: 20px;
 }
-.footer_social li a {
+.footer_social_link {
+	display: flex;
+}
+.footer_social_link li a {
 	display: block;
     height: 100%;
 }
