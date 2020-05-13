@@ -3,10 +3,10 @@
 const [name, email, passOne, passTwo, submit, signUpWindow, signupButton,
   avatar, img, loginIn, passIn, submitIn, logInWindow, loginButton,
   imgNone, userAvatar, closedSignup, closedLogIn, signUpOverlay, logInOverlay, userName,
-  modalError] = ['name', 'email', 'pass_one', 'pass_two', 'submit', 'sign_up_window', 'signupButton',
+  modalError, exit] = ['name', 'email', 'pass_one', 'pass_two', 'submit', 'sign_up_window', 'signupButton',
   'get_avatar', 'avatar', 'login_in', 'pass_in', 'submit_in', 'log_in_window', 'loginButton',
   'img_none', 'user_avatar', 'closed_signup', 'closed_login', 'sign_up_overlay', 'log_in_overlay', 'user_name',
-  'modal_error']
+  'modal_error', 'exit']
   .map((item) => document.getElementById(item));
 const cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)name\s*\=\s*([^;]*).*$)|^.*$/, '$1');
 passTwo.disabled = true;
@@ -31,6 +31,16 @@ const cookieSave = (nameUser, passhash) => {
   document.cookie = `name=${nameUser}`;
   document.cookie = `hash=${passhash}`;
 };
+function cookiesDelete() {
+  const cookies = document.cookie.split(';');
+  for (let i = 0; i < cookies.length; i++) {
+    const cookie = cookies[i];
+    const eqPos = cookie.indexOf('=');
+    const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+    document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;`;
+    document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
+  }
+}
 
 const renderUser = (userNameText, imgURL) => {
   signupButton.style.display = 'none';
@@ -38,16 +48,31 @@ const renderUser = (userNameText, imgURL) => {
   userName.insertAdjacentText('afterbegin', userNameText);
   userAvatar.src = `${imgURL}`;
   userAvatar.style.display = 'block';
+  exit.style.display = 'block';
+};
+const signupNull = () => {
+  img.src = 'img/user.svg';
+  name.value = '';
+  email.value = '';
+  email.style.border = 'none';
+  passOne.value = '';
+  passTwo.value = '';
+};
+const logInNull = () => {
+  loginIn.value = '';
+  passIn.value = '';
 };
 
 //= ==============================callback===============
 
 signupButton.onclick = function (event) {
   modalSignUp.open();
+  signupNull();
 };
 
 loginButton.onclick = function (event) {
   modalLogIn.open();
+  logInNull();
 };
 
 closedSignup.onclick = function (event) {
@@ -110,6 +135,7 @@ submit.onclick = function (event) {
       cookieSave(name.value, hash);
       renderUser(name.value, img.src);
       modalSignUp.closed();
+      signupNull();
     } else throw new Error('Error cookie');
   });
 };
@@ -140,10 +166,22 @@ submitIn.onclick = async function (event) {
       cookieSave(loginIn.value, usersData.passhash);
       renderUser(loginIn.value, usersData.avatar);
       modalLogIn.closed();
+      logInNull();
     } else modalError.innerText = 'Incorrect password';
   }
 };
 
-//= ==============================function call====================
+//= ============================================ exit
+
+exit.onclick = function (event) {
+  signupButton.style.display = 'block';
+  loginButton.style.display = 'block';
+  userName.innerText = '';
+  userAvatar.style.display = 'none';
+  exit.style.display = 'none';
+  cookiesDelete();
+};
+
+//= ============================================ function call
 
 cookieRead(cookieValue);

@@ -1,4 +1,4 @@
-let signUpHtml = `
+const signUpHtml = `
   <div class="modal_overlay" id="sign_up_overlay">
     <div class="modal_window" id="sign_up_window">
       <div class="modal_title">
@@ -30,8 +30,8 @@ let signUpHtml = `
       </div>
     </div>
   </div>
-`
-let logInHtml = `
+`;
+const logInHtml = `
   <div class="modal_overlay" id="log_in_overlay">
     <div class="modal_window" id="log_in_window">
       <div class="modal_title">
@@ -47,25 +47,26 @@ let logInHtml = `
       </div>
     </div>
   </div>
-`
+`;
 class Modal {
-  constructor (html, time) {
-    this.modal = document.createElement('div')
-    this.modal.classList.add('modal')
-    this.modal.insertAdjacentHTML('afterbegin',html)
-    document.body.appendChild(this.modal)
+  constructor(html) {
+    this.modal = document.createElement('div');
+    this.modal.classList.add('modal');
+    this.modal.insertAdjacentHTML('afterbegin', html);
+    document.body.appendChild(this.modal);
   }
-  open () {
-    this.modal.classList.add('open')
+
+  open() {
+    this.modal.classList.add('open');
   }
-  closed () {
-    this.modal.classList.remove('open')
-    this.modal.classList.add('hide')
+
+  closed() {
+    this.modal.classList.remove('open');
+    this.modal.classList.add('hide');
     setTimeout(() => {
-      this.modal.classList.remove('hide')
-    },300)
+      this.modal.classList.remove('hide');
+    }, 300);
   }
 }
-
-let modalSignUp = new Modal(signUpHtml)
-let modalLogIn = new Modal(logInHtml)
+const modalSignUp = new Modal(signUpHtml);
+const modalLogIn = new Modal(logInHtml);
