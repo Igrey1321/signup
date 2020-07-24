@@ -8,39 +8,29 @@ const [name, email, passOne, passTwo, submit, signUpWindow, signupButton,
   'img_none', 'user_avatar', 'closed_signup', 'closed_login', 'sign_up_overlay', 'log_in_overlay', 'user_name',
   'modal_error', 'exit']
   .map((item) => document.getElementById(item));
-const cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)name\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+
 passTwo.disabled = true;
 submit.disabled = true;
 
 //= ==============================function==========================
 
 const fetchRequest = async (nameUser) => await (await
-fetch(`https://garevna-rest-api.glitch.me/user/${nameUser}`)).json();
+fetch(`http://localhost:3000/users?name=${nameUser}`)).json();
 
-const cookieRead = async (nameUser) => {
+
+const requestUser = async (nameUser) => {
   if (nameUser !== '') {
-    const usersInfo = await fetchRequest(nameUser);
-    const cookieHash = document.cookie.replace(/(?:(?:^|.*;\s*)hash\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    if (usersInfo.passhash === cookieHash) {
-      renderUser(nameUser, usersInfo.avatar);
+    const usersData = await fetchRequest(nameUser);
+    const localHash = localStorage.getItem('hash');
+    if (usersData[0].passhash === localHash) {
+      renderUser(nameUser, usersData[0].avatar);
     }
   }
 };
 
-const cookieSave = (nameUser, passhash) => {
-  document.cookie = `name=${nameUser}`;
-  document.cookie = `hash=${passhash}`;
+const saveUserLocal = (key, value) => {
+  localStorage.setItem(key, value);
 };
-function cookiesDelete() {
-  const cookies = document.cookie.split(';');
-  for (let i = 0; i < cookies.length; i++) {
-    const cookie = cookies[i];
-    const eqPos = cookie.indexOf('=');
-    const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-    document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;`;
-    document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
-  }
-}
 
 const renderUser = (userNameText, imgURL) => {
   signupButton.style.display = 'none';
@@ -59,6 +49,7 @@ const signupNull = () => {
   passTwo.value = '';
 };
 const logInNull = () => {
+  modalError.innerText = '';
   loginIn.value = '';
   passIn.value = '';
 };
@@ -120,19 +111,21 @@ passTwo.oninput = function (event) {
 
 submit.onclick = function (event) {
   const hash = Sha256.hash(passTwo.value);
-  fetch(`https://garevna-rest-api.glitch.me/user/${name.value}`, {
+  fetch('http://localhost:3000/users', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
+      name: name.value,
       passhash: hash,
       avatar: img.src,
       email: email.value,
     }),
   }).then((response) => {
     if (response.ok) {
-      cookieSave(name.value, hash);
+      saveUserLocal('name', name.value);
+      saveUserLocal('hash', hash);
       renderUser(name.value, img.src);
       modalSignUp.closed();
       signupNull();
@@ -159,12 +152,13 @@ submitIn.onclick = async function (event) {
   const passValue = Sha256.hash(passIn.value);
   if (loginIn.value !== '') {
     const usersData = await fetchRequest(loginIn.value);
-    if (usersData.error === 404) {
+    if (usersData.length === 0) {
       modalError.innerText = `User ${loginIn.value} not found`;
     } else
-    if (passValue === usersData.passhash) {
-      cookieSave(loginIn.value, usersData.passhash);
-      renderUser(loginIn.value, usersData.avatar);
+    if (passValue === usersData[0].passhash) {
+      saveUserLocal('name', loginIn.value);
+      saveUserLocal('hash', usersData[0].passhash);
+      renderUser(loginIn.value, usersData[0].avatar);
       modalLogIn.closed();
       logInNull();
     } else modalError.innerText = 'Incorrect password';
@@ -179,9 +173,14 @@ exit.onclick = function (event) {
   userName.innerText = '';
   userAvatar.style.display = 'none';
   exit.style.display = 'none';
-  cookiesDelete();
+  localStorage.clear();
 };
 
 //= ============================================ function call
 
-cookieRead(cookieValue);
+(function autoAuthorization() {
+  const localUser = localStorage.getItem('name');
+  if (localUser !== null) {
+    requestUser(localUser);
+  }
+}());
